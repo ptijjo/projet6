@@ -1,11 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const userRoute = require('./routes/users');
-const sauceRoute = require('./routes/sauces');
-const likeRoute = require('./routes/likes');
+const Sauce = require('./models/sauces');
 
-
+const sauceRoutes = require('./routes/sauces');
+const userRoutes = require("./routes/user");
+const likeRoutes = require('./routes/likes');
 
 
 
@@ -39,20 +39,21 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-//*****************************IDENTIFICATION***********************************************
-
-// Gestion des utilisateurs
-app.use("/api/auth", userRoute);
 
 
-// Gestion des sauces
-app.use("/api/sauces", sauceRoute);
+/************************************* Gestion de connection *******************/
 
-//Gestion des likes
-
-app.use("/api/sauces", likeRoute);
+app.use("/api/auth", userRoutes);
 
 
+/************************************* Gestion des sauces ******************/
+
+app.use("/api/sauces", sauceRoutes);
+
+
+/*********************************** Gestion des likes ***************************/
+
+app.use("/api/sauces", likeRoutes);
 
 
 

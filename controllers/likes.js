@@ -1,7 +1,8 @@
 const Sauce = require('../models/sauces');
 
 
-exports.like = (req, res, next) => {
+
+exports.likes = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
         .then((sauce) => {
             // --------------------------- Fonction like ---------------------------------------------------------------------------
@@ -34,4 +35,4 @@ exports.like = (req, res, next) => {
             //**********************************fin fonction dislike **************************************************************
         })
         .catch(error => res.status(404).json({ error }));
-};
+}
