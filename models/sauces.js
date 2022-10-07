@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const mongodbError = require('mongoose-mongodb-errors');
+
 const sauceSchema = mongoose.Schema({
 
     userId: { type: String, require: true },
@@ -13,12 +15,9 @@ const sauceSchema = mongoose.Schema({
     dislikes: { type: Number, default: 0 },
     usersLiked: { type: [String] },
     usersDisliked: { type: [String] },
-
-
-
 })
 
-
+sauceSchema.plugin(mongodbError);
 
 
 

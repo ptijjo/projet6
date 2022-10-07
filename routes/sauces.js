@@ -20,7 +20,7 @@ router.post('/', auth, multer, sauceCtrl.add);
 // modifier une sauce
 router.put('/:id', auth, multer, sauceCtrl.modify);
 // supprimer une sauce
-router.delete('/:id', auth, multer, sauceCtrl.delete);
+router.delete('/:id', auth, sauceCtrl.delete);
 
 
 

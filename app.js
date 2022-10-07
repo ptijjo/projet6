@@ -1,15 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const Sauce = require('./models/sauces');
+const path = require('path');
 
 const sauceRoutes = require('./routes/sauces');
 const userRoutes = require("./routes/user");
 const likeRoutes = require('./routes/likes');
 
+const url = require('./env/UrlConnectionBDD');
 
 
-const path = require('path');
+
+
 
 
 
@@ -19,11 +20,7 @@ const app = express();
 app.use(express.json());
 
 
-mongoose.connect('mongodb+srv://ptijjo:francoise56@opcp6.2crxyfc.mongodb.net/?retryWrites=true&w=majority',
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
@@ -36,7 +33,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(bodyParser.json());
+
+
+
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 

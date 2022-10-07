@@ -1,9 +1,17 @@
 const User = require('../models/users');
 const cryptage = require('bcrypt');
 const token = require('jsonwebtoken');
-
+const emailValidator = require('../middleware/emailValidator');
+const passwordValidtor = require('../middleware/passwordValidator');
 
 exports.creatCount = (req, res, next) => {
+    if (!emailValidator(req.body.email)) {
+        return res.status(400).json({ message: "Adresse email incorrect" })
+    };
+
+    if (!passwordValidtor(req.body.password)) {
+        return res.status(400).json({ message: "Votre mot de passe doit contenir au moins 8 caractères avec au moins un chiffre, une majuscule et un caractère spécial" })
+    };
     cryptage.hash(req.body.password, 10)
         .then(hash => {
             const user = new User({
